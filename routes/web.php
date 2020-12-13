@@ -21,13 +21,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     
-    Route::get('/users', 'UserController@index')->name('usuarios');
-    Route::get('/orders', 'OrderController@index')->name('ordenes');
-    Route::get('/products', 'ProductController@index')->name('productos');
-    Route::get('/addresses/{user_id}', 'AddressController@index')->name('direcciones');
+    Route::group(['middleware' => ['role:Administrador']], function () {
+        Route::get('/users', 'UserController@index')->name('usuarios');
+        Route::get('/orders', 'OrderController@index')->name('ordenes');
+        Route::get('/products', 'ProductController@index')->name('productos');
+        Route::get('/addresses/{user_id}', 'AddressController@index')->name('direcciones');
+    });
 
-    Route::get('/mydata', 'ClientController@data')->name('misdatos');
-    Route::get('/myaddress', 'ClientController@address')->name('misdirecciones');
-    Route::get('/myorders', 'ClientController@order')->name('misordenes');
+    Route::group(['middleware' => ['role:Cliente']], function () {
+        Route::get('/mydata', 'ClientController@data')->name('misdatos');
+        Route::get('/myaddress', 'ClientController@address')->name('misdirecciones');
+        Route::get('/myorders', 'ClientController@order')->name('misordenes');
+    });
 
 });
