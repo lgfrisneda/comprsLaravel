@@ -22,13 +22,17 @@ Route::post('login', 'Api\AuthController@login');
 
 Route::group(['middleware' => 'auth:api'], function () {
 
-    Route::get('users', 'Api\AdminController@user');
-    Route::get('orders', 'Api\AdminController@order');
-    Route::get('products', 'Api\AdminController@product');
+    Route::group(['middleware' => ['role:Administrador']], function () {
+        Route::get('users', 'Api\AdminController@user');
+        Route::get('orders', 'Api\AdminController@order');
+        Route::get('products', 'Api\AdminController@product');
+    });
 
-    Route::get('mydata', 'Api\ClientController@data');
-    Route::get('myaddresses', 'Api\ClientController@address');
-    Route::get('myorders', 'Api\ClientController@order');
+    Route::group(['middleware' => ['role:Cliente']], function () {
+        Route::get('mydata', 'Api\ClientController@data');
+        Route::get('myaddresses', 'Api\ClientController@address');
+        Route::get('myorders', 'Api\ClientController@order');
+    });
 
     Route::get('posts', 'Api\PostController@index');
 
