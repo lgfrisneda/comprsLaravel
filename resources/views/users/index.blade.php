@@ -24,9 +24,11 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                <a href="{{ route('direcciones', $user->id) }}">
-                                    Ver direccion(es)
-                                </a>
+                                    <ul>
+                                    @foreach( $user->addresses as $address)
+                                        <li>{{ $address->description }}</li>
+                                    @endforeach
+                                    </ul>
                                 </td>
                             </tr>
                             @endforeach
