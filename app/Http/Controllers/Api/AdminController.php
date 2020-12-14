@@ -12,7 +12,7 @@ class AdminController extends Controller
 {
     public function user()
     {
-        $users = User::orderBy('id', 'ASC')->paginate(5);
+        $users = User::with('addresses')->orderBy('id', 'ASC')->paginate(5);
 
         return response()->json(compact('users'));
     }
@@ -26,7 +26,7 @@ class AdminController extends Controller
 
     public function order()
     {
-        $orders = Order::orderBy('id', 'ASC')->paginate(5);
+        $orders = Order::with(['address', 'product'])->orderBy('id', 'ASC')->paginate(5);
 
         return response()->json(compact('orders'));
     }
