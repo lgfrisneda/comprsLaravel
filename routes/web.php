@@ -34,4 +34,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/myorders', 'ClientController@order')->name('misordenes');
     });
 
+    Route::get('third', 'ThirdController@index');
+
 });
