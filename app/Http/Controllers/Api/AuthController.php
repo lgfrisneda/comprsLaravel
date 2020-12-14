@@ -68,10 +68,4 @@ class AuthController extends Controller
             'message' => 'Sesion cerrada.'
         ]);
     }
-
-    public function profile()
-    {
-        $user = Auth::user();
-        return response()->json(compact('user'), 200);
-    }
 }
