@@ -41,10 +41,13 @@ class PermissionsTableSeeder extends Seeder
             'orders.show'
         ]);
 
-        $userCliente = User::find(1);
+        $userAdmin = User::find(1);
+        $userAdmin->assignRole('Administrador');
+
+        $userCliente = User::find(2);
         $userCliente->assignRole('Cliente');
 
-        $userAdmin = User::find(2);
-        $userAdmin->assignRole('Administrador');
+        $userCliente = User::find(3);
+        $userCliente->assignRole('Cliente');
     }
 }
